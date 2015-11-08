@@ -28,7 +28,7 @@ function getDataFor (title, language) {
 
         // The way hearing aid is done is by class. The 3d span
         // either has a class 'a41' for hearing aid or 'a40' for not
-        data.hi = $(row.find('td')[2]).attr('class') === 'a41' ? true : false;
+        data.hi = $(row.find('td')[2]).attr('class') === 'a41';
 
         if (!language || data.language === language)  arr.push(data);
       });
