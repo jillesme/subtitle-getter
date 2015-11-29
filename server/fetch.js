@@ -12,6 +12,14 @@ var server = express();
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: false }));
 
+// DEBUG only
+server.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+
 server.get('/title/:title', function (req, res) {
   var title = req.params.title;
   crawler.getDataFor(title).then(function (subtitles) {
