@@ -27,7 +27,6 @@ function toggle (filter) {
 let FilterStore = assign({}, EventEmitter.prototype, {
 
   getFilters: function() {
-    console.log(_filters);
     return _filters;
   },
 
