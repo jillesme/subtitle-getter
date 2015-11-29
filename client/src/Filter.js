@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import FilterActions from './actions/FilterActions.js';
+import FilterStore from './stores/FilterStore.js';
 import languages from './languages.js';
 
 
@@ -15,15 +17,10 @@ export default class Filter extends Component {
   }
   addOrSplice (ev) {
     let target = ev.target.value;
-    let newLangs = this.state.languages;
-    let index = newLangs.indexOf(target);
-    if (index > -1) {
-      newLangs.splice(index, 1);
-    } else {
-      newLangs.push(target);
-    }
+    FilterActions.toggle(target);
+
     this.setState({
-      languages: newLangs
+      languages: FilterStore.getFilters()
     });
   }
   displayLanguages () {
