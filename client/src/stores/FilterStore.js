@@ -37,7 +37,7 @@ let FilterStore = assign({}, EventEmitter.prototype, {
   isFiltering: function () {
     return _filters.length > 0;
   },
-  
+
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },
