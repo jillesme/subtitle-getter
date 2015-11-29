@@ -30,6 +30,14 @@ let FilterStore = assign({}, EventEmitter.prototype, {
     return _filters;
   },
 
+  hasFilter: function (filter) {
+    return _filters.indexOf(filter) > -1;
+  },
+
+  isFiltering: function () {
+    return _filters.length > 0;
+  },
+  
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },

@@ -9,7 +9,6 @@ export default class SubtitleOverview extends Component {
     super(props);
     this.state = {
       error: '',
-      filters: [],
       languages: {}
     };
     this.subtitlesUpdated = this.subtitlesUpdated.bind(this);
@@ -30,8 +29,9 @@ export default class SubtitleOverview extends Component {
     if (this.state.error) return (<h1>this.state.error</h1>);
     return Object.keys(this.state.languages)
     .filter(language => {
-      if (this.state.filters.length === 0) return true;
-      return this.state.filters.indexOf(language) > -1;
+      // Show everything if no filters are set
+      if (!FilterStore.isFiltering()) return true;
+      return FilterStore.hasFilter(language);
     })
     .map(language => {
       return (

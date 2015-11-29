@@ -1,15 +1,5 @@
 import React, { Component } from 'react';
 
-/*
-author: "Idefix"
-comment: ""
-hi: false
-language: "Swedish"
-matchRate: 5
-title: "The.Blacklist.S03E07.720p.HDTV.x264-FLEET"
-url: "/subtitles/the-blacklist-third-season/swedish/1225262"
-*/
-
 export default class SubtitlesContent extends Component {
   constructor (props) {
     super(props);
