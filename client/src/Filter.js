@@ -31,7 +31,7 @@ export default class Filter extends Component {
   render () {
     return (
       <div>
-        filter: {this.state.languages.join(', ')}
+        Filter: {this.state.languages.join(', ')}
           <ul>
             {this.displayLanguages()}
           </ul>

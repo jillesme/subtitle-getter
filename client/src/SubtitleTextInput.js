@@ -4,6 +4,8 @@ import superagent from 'superagent';
 import LoadingIndicator from './LoadingIndicator'
 import SubtitleOverview from './SubtitleOverview'
 
+import FilterStore from './stores/FilterStore.js';
+
 export default class SubtitleTextInput extends Component {
   constructor (props) {
     super(props);
@@ -33,7 +35,16 @@ export default class SubtitleTextInput extends Component {
   }
   displayResult () {
     if (!this.state.result) return null;
-    let list = Object.keys(this.state.result).map((language, i) => {
+    let list = Object.keys(this.state.result)
+    .filter(language => {
+      let filters = FilterStore.getFilters();
+      if (filters.length === 0) {
+        return true;
+      } else {
+        return filters.indexOf(language) > -1;
+      }
+    })
+    .map((language, i) => {
       return (<li key={i}>
         <span>{language} - </span> ({this.state.result[language].length})
         <SubtitleOverview results={this.state.result[language]} />
