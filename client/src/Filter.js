@@ -24,15 +24,25 @@ export default class Filter extends Component {
     });
   }
   displayLanguages () {
+    let liStyle = {
+      display: 'inline-block'
+    };
     return Object.keys(languages).map((language, i) => {
-      return (<li key={i}><input type="checkbox" name="language" value={language} onClick={this.addOrSplice}/> {language} </li>);
+      return (
+      <li key={i} style={liStyle}>
+        <input type="checkbox" name="language" value={language} onClick={this.addOrSplice}/> {language} 
+       </li>);
     });
   }
   render () {
+    // TODO: Move this into .css
+    let ulStyle = {
+      listStyle: 'none'
+    };
     return (
       <div>
         Filter: {this.state.languages.join(', ')}
-          <ul>
+          <ul style={ulStyle}>
             {this.displayLanguages()}
           </ul>
       </div>
