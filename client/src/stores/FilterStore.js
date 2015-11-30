@@ -1,6 +1,7 @@
 let Dispatcher = require('../dispatcher/Dispatcher');
 let EventEmitter = require('events').EventEmitter;
 let assign = require('object-assign');
+const ActionTypes = require('../constants/SubtitleConstants').ActionTypes;
 
 const CHANGE_EVENT = 'change';
 
@@ -55,17 +56,17 @@ Dispatcher.register(function (action) {
 
   switch(action.actionType) {
 
-    case 'add':
+    case ActionTypes.FILTER_ADD:
       add(action.filter);
       FilterStore.emitChange();
       break;
 
-    case 'remove':
+    case ActionTypes.FITLER_REMOVE:
       remove(action.filter);
       FilterStore.emitChange();
       break;
 
-    case 'toggle':
+    case ActionTypes.FILTER_TOGGLE:
       toggle(action.filter);
       FilterStore.emitChange();
       break;

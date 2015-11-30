@@ -1,32 +1,25 @@
 import superagent from 'superagent';
 
-let Dispatcher = require('../dispatcher/Dispatcher.js');
+const Dispatcher = require('../dispatcher/Dispatcher.js');
+const ActionTypes = require('../constants/SubtitleConstants').ActionTypes;
 
 let SubtitleActions = {
 
   get: function (subtitle) {
 
-    let toDispatch = {
-      actionType: 'get',
-      content: null
-    };
-
     superagent.get('http://localhost:3030/title/' + subtitle)
     .end((err, response) => {
-      if (err) {
-        toDispatch.content = { error: err };
-      } else {
-        toDispatch.content = { subtitles: response.body };
-      }
-
-      Dispatcher.dispatch(toDispatch);
+      Dispatcher.dispatch({
+        actionType: ActionTypes.SUBTITLES_GET,
+        content: { err: err, subtitles: response && response.body }
+      });
     });
 
   },
 
   reset: function () {
     Dispatcher.dispatch({
-      actionType: 'reset'
+      actionType: ActionTypes.SUBTITLES_RESET
     });
   }
 

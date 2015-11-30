@@ -1,6 +1,7 @@
 let Dispatcher = require('../dispatcher/Dispatcher');
 let EventEmitter = require('events').EventEmitter;
 let assign = require('object-assign');
+const ActionTypes = require('../constants/SubtitleConstants').ActionTypes;
 
 const CHANGE_EVENT = 'change';
 
@@ -8,7 +9,7 @@ let _subtitles = [];
 let _error = '';
 
 function get (content) {
-  if (content.error) {
+  if (content.err) {
     _error = content.error;
   } else {
     _subtitles = content.subtitles;
@@ -44,12 +45,12 @@ Dispatcher.register(function (action) {
 
   switch(action.actionType) {
 
-    case 'get':
+    case ActionTypes.SUBTITLES_GET:
       get(action.content);
       SubtitleStore.emitChange();
       break;
 
-    case 'reset':
+    case ActionTypes.SUBTITLES_RESET:
       reset();
       SubtitleStore.emitChange();
       break;
