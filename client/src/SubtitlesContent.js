@@ -14,8 +14,8 @@ export default class SubtitlesContent extends Component {
     return isHearingAid ? '(HI)' : '';
   }
   displayList () {
-    return this.props.subtitles.map(subtitle => {
-      return (<li>
+    return this.props.subtitles.map((subtitle, i) => {
+      return (<li key={i}>
               [{this.calculateMatchRate(subtitle.matchRate)}]
               - {subtitle.title} by {subtitle.author} {this.showHearingAid(subtitle.hi)}
               </li>);

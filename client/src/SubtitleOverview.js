@@ -33,9 +33,9 @@ export default class SubtitleOverview extends Component {
       if (!FilterStore.isFiltering()) return true;
       return FilterStore.hasFilter(language);
     })
-    .map(language => {
+    .map((language, i) => {
       return (
-        <div>
+        <div key={i}>
           <h2>{language}</h2>
           <SubtitlesContent subtitles={this.state.languages[language]} />
         </div>
