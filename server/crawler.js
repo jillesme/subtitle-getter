@@ -4,7 +4,7 @@ var Promise = require('promise');
 
 var config = require('./config');
 
-function getDataFor (title, language) {
+function getDataFor (title) {
   return new Promise(function (resolve, reject) {
     request(config.url + title, function (err, data) {
       if (err) reject(err);
@@ -30,7 +30,7 @@ function getDataFor (title, language) {
         // either has a class 'a41' for hearing aid or 'a40' for not
         data.hi = $(row.find('td')[2]).attr('class') === 'a41';
 
-        if (!language || data.language === language)  arr.push(data);
+        arr.push(data);
       });
       resolve(arr);
     });
