@@ -1,5 +1,7 @@
 module.exports = {
 
+  API_URL: 'http://localhost:3030/title/',
+
   ActionTypes: {
     FILTER_ADD: 'FILTER_ADD',
     FILTER_REMOVE: 'FILTER_REMOVE',
