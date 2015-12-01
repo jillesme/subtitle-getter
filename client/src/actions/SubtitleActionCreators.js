@@ -1,8 +1,8 @@
 import superagent from 'superagent';
 
-const Dispatcher = require('../dispatcher/Dispatcher.js');
-const ActionTypes = require('../constants/SubtitleConstants').ActionTypes;
-var SubtitleServerUtils = require('../utils/SubtitleServerUtils');
+import Dispatcher from '../dispatcher/Dispatcher.js';
+import { ActionTypes } from '../constants/SubtitleConstants';
+import SubtitleServerUtils from '../utils/SubtitleServerUtils';
 
 
 module.exports = {

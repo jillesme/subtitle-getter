@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import SubtitlesContent from './SubtitlesContent';
 
-let SubtitleStore = require('./stores/SubtitleStore');
-let FilterStore = require('./stores/FilterStore');
+import SubtitleStore from './stores/SubtitleStore';
+import FilterStore from './stores/FilterStore';
 
 export default class SubtitleOverview extends Component {
   constructor (props) {

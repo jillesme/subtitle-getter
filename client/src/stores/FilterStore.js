@@ -1,7 +1,7 @@
-let Dispatcher = require('../dispatcher/Dispatcher');
-let EventEmitter = require('events').EventEmitter;
-let assign = require('object-assign');
-const ActionTypes = require('../constants/SubtitleConstants').ActionTypes;
+import Dispatcher from '../dispatcher/Dispatcher';
+import { EventEmitter } from 'events';
+import assign from 'object-assign';
+import { ActionTypes } from '../constants/SubtitleConstants';
 
 const CHANGE_EVENT = 'change';
 
