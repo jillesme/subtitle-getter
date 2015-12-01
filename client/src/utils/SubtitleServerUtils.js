@@ -13,7 +13,7 @@ module.exports = {
   fetchDownloadUrl: function (query) {
     request.get(API.URL + API.DOWNLOAD + query)
     .end((err, response) => {
-      SubitleServerActionCreators.receiveDownloadUrl({ url: response && response.body });
+      SubitleServerActionCreators.receiveDownloadUrl({ url: response && response.body.url });
     });
   }
 };

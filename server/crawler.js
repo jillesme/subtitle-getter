@@ -40,7 +40,6 @@ function getDataFor (title) {
 function downloadSubtitle (query) {
   return new Promise(function (resolve, reject) {
     request(config.download_url + query, function (err, data) {
-      console.log(err);
       if (err) reject(err);
       var $ = cheerio.load(data.body, { normalizeWhitespace: true });
       resolve($('#downloadButton').attr('href'));

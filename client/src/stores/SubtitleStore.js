@@ -1,7 +1,7 @@
 import Dispatcher from '../dispatcher/Dispatcher';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
-import { ActionTypes } from '../constants/SubtitleConstants';
+import { REMOTE, ActionTypes } from '../constants/SubtitleConstants';
 import DOMUtils from '../utils/DOMUtils';
 
 const CHANGE_EVENT = 'change';
@@ -13,25 +13,21 @@ let _state = {
 };
 
 function fetch () {
-  console.log('fetchinnn');
   _state.loading = true;
 }
 
 function receive (content) {
-  console.log('recevinnnn');
   _state.loading = false;
   _state.subtitles = content.subtitles;
 }
 
 function download () {
-  console.log('download!');
-  // _state.loading = true;
+  _state.loading = true;
 }
 
 function receiveUrl (content) {
-  // _state.loading = false;
-  console.log('receiveurl', content.url.url);
-  let url = 'http://subscene.com/' + content.url.url;
+  _state.loading = false;
+  let url = REMOTE + content.url;
   DOMUtils.download(url);
 }
 

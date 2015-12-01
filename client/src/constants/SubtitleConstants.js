@@ -1,5 +1,7 @@
 module.exports = {
 
+  REMOTE: 'http://subscene.com/',
+
   API: {
     URL: 'http://localhost:3030',
     TITLE: '/title/',
