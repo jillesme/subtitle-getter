@@ -1,23 +1,25 @@
 import Dispatcher from '../dispatcher/Dispatcher';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
-import { ActionTypes } from '../constants/SubtitleConstants';
+import { ActionTypes, AVAILABLE_FILTER_LANGUAGES } from '../constants/SubtitleConstants';
 
 const CHANGE_EVENT = 'change';
 
-let _filters = [];
+let _state = {
+  activeFilters: []
+};
 
 function remove (filter, index) {
-  if (!index) index = _filters.indexOf(filter);
-  _filters.splice(index, 1);
+  if (!index) index = _state.activeFilters.indexOf(filter);
+  _state.activeFilters.splice(index, 1);
 }
 
 function add (filter) {
-  _filters.push(filter);
+  _state.activeFilters.push(filter);
 }
 
 function toggle (filter) {
-  let index = _filters.indexOf(filter);
+  let index = _state.activeFilters.indexOf(filter);
   if (index === -1) {
     add(filter);
   } else {
@@ -27,16 +29,20 @@ function toggle (filter) {
 
 let FilterStore = assign({}, EventEmitter.prototype, {
 
-  getFilters: function() {
-    return _filters;
+  getState: function() {
+    return _state;
+  },
+
+  getAvailableFilters: function () {
+    return AVAILABLE_FILTER_LANGUAGES;
   },
 
   hasFilter: function (filter) {
-    return _filters.indexOf(filter) > -1;
+    return _state.activeFilters.indexOf(filter) > -1;
   },
 
   isFiltering: function () {
-    return _filters.length > 0;
+    return _state.activeFilters.length > 0;
   },
 
   emitChange: function() {

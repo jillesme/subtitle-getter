@@ -7,37 +7,22 @@ import FilterStore from './stores/FilterStore';
 export default class SubtitleOverview extends Component {
   constructor (props) {
     super(props);
-    this.state = {
-      loading: false,
-      error: '',
-      languages: {}
-    };
+    this.state = SubtitleStore.getState();
+
     this.subtitlesUpdated = this.subtitlesUpdated.bind(this);
     this.filtersUpdated = this.filtersUpdated.bind(this);
   }
   subtitlesUpdated () {
-    // TODO: huge todo, move state to Store and just call SubtitleStore.getState();
     // we get an object back: key language, value subtitles
-
-    if (SubtitleStore.isLoading()) {
-      return this.setState({ loading: true });
-    } else {
-      this.setState({ loading: false });
-    }
-
-    this.setState({
-      languages: SubtitleStore.getSubtitles()
-    });
+    this.setState(SubtitleStore.getState());
   }
   filtersUpdated () {
-    let state = this.state;
-    state.filters = FilterStore.getFilters();
-    this.setState(state);
+    this.setState(FilterStore.getState());
   }
   displaySubtitles () {
-    if (this.state.error) return (<h1>this.state.error</h1>);
+    if (this.state.error) return (<h1>{this.state.error}</h1>);
     if (this.state.loading) return (<h1>Loading!</h1>);
-    return Object.keys(this.state.languages)
+    return Object.keys(this.state.subtitles)
     .filter(language => {
       // Show everything if no filters are set
       if (!FilterStore.isFiltering()) return true;
@@ -47,7 +32,7 @@ export default class SubtitleOverview extends Component {
       return (
         <div key={i}>
           <h2>{language}</h2>
-          <SubtitlesContent subtitles={this.state.languages[language]} />
+          <SubtitlesContent subtitles={this.state.subtitles[language]} />
         </div>
       )
     });

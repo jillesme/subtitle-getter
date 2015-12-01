@@ -9,7 +9,26 @@ module.exports = {
 
     SUBTITLES_FETCH: 'SUBTITLES_FETCH',
     SUBTITLES_RECEIVE: 'SUBTITLES_RECEIVE',
-    SUBTITLES_RESET: 'SUBTITLES_RESET',
-  }
+    SUBTITLES_RESET: 'SUBTITLES_RESET'
+  },
+
+  AVAILABLE_FILTER_LANGUAGES: [
+  'Arabic',
+  'Brazillian Portuguese',
+  'Danish',
+  'Dutch',
+  'English',
+  'Farsi/Persian',
+  'Finnish',
+  'French',
+  'Hebrew',
+  'Indonesian',
+  'Italian',
+  'Norwegian',
+  'Romanian',
+  'Spanish',
+  'Swedish',
+  'Vietnamese'
+  ]
 
 };

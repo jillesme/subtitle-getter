@@ -1,36 +1,30 @@
 import React, { Component } from 'react';
 import FilterActions from './actions/FilterActionCreators.js';
 import FilterStore from './stores/FilterStore.js';
-import languages from './languages.js';
-
 
 export default class Filter extends Component {
   constructor (props) {
     super(props);
 
-    this.state = {
-      languages: []
-    };
+    this.state = FilterStore.getState();
 
     this.displayLanguages = this.displayLanguages.bind(this);
-    this.addOrSplice = this.addOrSplice.bind(this);
+    this.toggleFilter = this.toggleFilter.bind(this);
   }
-  addOrSplice (ev) {
+  toggleFilter (ev) {
     let target = ev.target.value;
     FilterActions.toggle(target);
 
-    this.setState({
-      languages: FilterStore.getFilters()
-    });
+    this.setState(FilterStore.getState());
   }
   displayLanguages () {
     let liStyle = {
       display: 'inline-block'
     };
-    return Object.keys(languages).map((language, i) => {
+    return FilterStore.getAvailableFilters().map((language, i) => {
       return (
       <li key={i} style={liStyle}>
-        <input type="checkbox" name="language" value={language} onClick={this.addOrSplice}/> {language} 
+        <input type="checkbox" name="language" value={language} onClick={this.toggleFilter}/> {language}
        </li>);
     });
   }
@@ -41,7 +35,7 @@ export default class Filter extends Component {
     };
     return (
       <div>
-        Filter: {this.state.languages.join(', ')}
+        Filter: {this.state.activeFilters.join(', ')}
           <ul style={ulStyle}>
             {this.displayLanguages()}
           </ul>

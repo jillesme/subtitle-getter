@@ -5,25 +5,31 @@ import { ActionTypes } from '../constants/SubtitleConstants';
 
 const CHANGE_EVENT = 'change';
 
-let _subtitles = [];
-let _loading = false;
-let _error = '';
+let _state = {
+  subtitles: [],
+  loading: false,
+  error: null
+};
 
 function fetch () {
-  _loading = true;
+  _state.loading = true;
 }
 
 function receive (content) {
-  _loading = false;
-  _subtitles = content.subtitles;
+  _state.loading = false;
+  _state.subtitles = content.subtitles;
 }
 
 function reset () {
-  _subtitles = [];
-  _error = '';
+  _state.subtitles = [];
+  _state.error = '';
 }
 
 let SubtitleStore = assign({}, EventEmitter.prototype, {
+
+  getState: function () {
+    return _state;
+  },
 
   getSubtitles: function() {
     return _subtitles;
