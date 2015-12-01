@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-let SubtitleActions = require('./actions/SubtitleActions.js');
+let SubtitleActions = require('./actions/SubtitleActionCreators.js');
 let SubtitleStore = require('./stores/SubtitleStore.js');
 
 export default class SubtitleTextInput extends Component {

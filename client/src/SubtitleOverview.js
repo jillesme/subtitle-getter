@@ -8,6 +8,7 @@ export default class SubtitleOverview extends Component {
   constructor (props) {
     super(props);
     this.state = {
+      loading: false,
       error: '',
       languages: {}
     };
@@ -15,7 +16,15 @@ export default class SubtitleOverview extends Component {
     this.filtersUpdated = this.filtersUpdated.bind(this);
   }
   subtitlesUpdated () {
+    // TODO: huge todo, move state to Store and just call SubtitleStore.getState();
     // we get an object back: key language, value subtitles
+
+    if (SubtitleStore.isLoading()) {
+      return this.setState({ loading: true });
+    } else {
+      this.setState({ loading: false });
+    }
+
     this.setState({
       languages: SubtitleStore.getSubtitles()
     });
@@ -27,6 +36,7 @@ export default class SubtitleOverview extends Component {
   }
   displaySubtitles () {
     if (this.state.error) return (<h1>this.state.error</h1>);
+    if (this.state.loading) return (<h1>Loading!</h1>);
     return Object.keys(this.state.languages)
     .filter(language => {
       // Show everything if no filters are set

@@ -1,7 +1,7 @@
 let Dispatcher = require('../dispatcher/Dispatcher.js');
 const ActionTypes = require('../constants/SubtitleConstants').ActionTypes;
 
-let FilterActions = {
+module.exports = {
 
   add: function (filter) {
     Dispatcher.dispatch({
@@ -25,5 +25,3 @@ let FilterActions = {
   }
 
 };
-
-module.exports = FilterActions;

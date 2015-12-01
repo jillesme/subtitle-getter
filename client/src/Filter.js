@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FilterActions from './actions/FilterActions.js';
+import FilterActions from './actions/FilterActionCreators.js';
 import FilterStore from './stores/FilterStore.js';
 import languages from './languages.js';
 

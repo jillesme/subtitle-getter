@@ -6,14 +6,16 @@ const ActionTypes = require('../constants/SubtitleConstants').ActionTypes;
 const CHANGE_EVENT = 'change';
 
 let _subtitles = [];
+let _loading = false;
 let _error = '';
 
-function get (content) {
-  if (content.err) {
-    _error = content.error;
-  } else {
-    _subtitles = content.subtitles;
-  }
+function fetch () {
+  _loading = true;
+}
+
+function receive (content) {
+  _loading = false;
+  _subtitles = content.subtitles;
 }
 
 function reset () {
@@ -24,8 +26,11 @@ function reset () {
 let SubtitleStore = assign({}, EventEmitter.prototype, {
 
   getSubtitles: function() {
-    if (_error) return _error;
     return _subtitles;
+  },
+
+  isLoading: function () {
+    return _loading;
   },
 
   emitChange: function() {
@@ -45,8 +50,13 @@ Dispatcher.register(function (action) {
 
   switch(action.actionType) {
 
-    case ActionTypes.SUBTITLES_GET:
-      get(action.content);
+    case ActionTypes.SUBTITLES_FETCH:
+      fetch();
+      SubtitleStore.emitChange();
+      break;
+
+    case ActionTypes.SUBTITLES_RECEIVE:
+      receive(action.content);
       SubtitleStore.emitChange();
       break;
 
