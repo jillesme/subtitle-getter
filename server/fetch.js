@@ -35,5 +35,12 @@ server.get('/title/:title', function (req, res) {
   });
 });
 
+server.get('/download/:url', function (req, res) {
+  var url = req.params.url;
+  crawler.downloadSubtitle(url).then(function (downloadUrl) {
+      res.json({ url: downloadUrl });
+  });
+});
+
 
 server.listen(3030);

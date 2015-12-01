@@ -14,6 +14,13 @@ module.exports = {
     SubtitleServerUtils.fetchSubtitles(title);
   },
 
+  download: function (query) {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.SUBTITLES_FETCH_DOWNLOAD
+    });
+    SubtitleServerUtils.fetchDownloadUrl(query);
+  },
+
   reset: function () {
     Dispatcher.dispatch({
       actionType: ActionTypes.SUBTITLES_RESET

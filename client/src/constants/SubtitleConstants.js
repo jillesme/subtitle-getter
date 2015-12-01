@@ -1,6 +1,10 @@
 module.exports = {
 
-  API_URL: 'http://localhost:3030/title/',
+  API: {
+    URL: 'http://localhost:3030',
+    TITLE: '/title/',
+    DOWNLOAD: '/download/'
+  },
 
   ActionTypes: {
     FILTER_ADD: 'FILTER_ADD',
@@ -9,7 +13,10 @@ module.exports = {
 
     SUBTITLES_FETCH: 'SUBTITLES_FETCH',
     SUBTITLES_RECEIVE: 'SUBTITLES_RECEIVE',
-    SUBTITLES_RESET: 'SUBTITLES_RESET'
+    SUBTITLES_RESET: 'SUBTITLES_RESET',
+
+    SUBTITLES_FETCH_DOWNLOAD: 'SUBTITLES_FETCH_DOWNLOAD',
+    SUBTITLES_RECEIVE_DOWNLOAD: 'SUBTITLES_RECEIVE_DOWNLOAD'
   },
 
   AVAILABLE_FILTER_LANGUAGES: [

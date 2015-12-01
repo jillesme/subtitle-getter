@@ -1,3 +1,4 @@
 module.exports = {
-  url: 'http://subscene.com/subtitles/release?q='
+  get_url: 'http://subscene.com/subtitles/release?q=',
+  download_url: 'http://subscene.com'
 };

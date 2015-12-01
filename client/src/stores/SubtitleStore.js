@@ -2,6 +2,7 @@ import Dispatcher from '../dispatcher/Dispatcher';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 import { ActionTypes } from '../constants/SubtitleConstants';
+import DOMUtils from '../utils/DOMUtils';
 
 const CHANGE_EVENT = 'change';
 
@@ -12,12 +13,26 @@ let _state = {
 };
 
 function fetch () {
+  console.log('fetchinnn');
   _state.loading = true;
 }
 
 function receive (content) {
+  console.log('recevinnnn');
   _state.loading = false;
   _state.subtitles = content.subtitles;
+}
+
+function download () {
+  console.log('download!');
+  // _state.loading = true;
+}
+
+function receiveUrl (content) {
+  // _state.loading = false;
+  console.log('receiveurl', content.url.url);
+  let url = 'http://subscene.com/' + content.url.url;
+  DOMUtils.download(url);
 }
 
 function reset () {
@@ -63,6 +78,16 @@ Dispatcher.register(function (action) {
 
     case ActionTypes.SUBTITLES_RECEIVE:
       receive(action.content);
+      SubtitleStore.emitChange();
+      break;
+
+    case ActionTypes.SUBTITLES_FETCH_DOWNLOAD:
+      download();
+      SubtitleStore.emitChange();
+      break;
+
+    case ActionTypes.SUBTITLES_RECEIVE_DOWNLOAD:
+      receiveUrl(action.content);
       SubtitleStore.emitChange();
       break;
 

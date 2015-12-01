@@ -6,7 +6,7 @@ var config = require('./config');
 
 function getDataFor (title) {
   return new Promise(function (resolve, reject) {
-    request(config.url + title, function (err, data) {
+    request(config.get_url + title, function (err, data) {
       if (err) reject(err);
       var $ = cheerio.load(data.body, { normalizeWhitespace: true });
       var resultsTable = $('table tbody');
@@ -37,6 +37,18 @@ function getDataFor (title) {
   });
 }
 
+function downloadSubtitle (query) {
+  return new Promise(function (resolve, reject) {
+    request(config.download_url + query, function (err, data) {
+      console.log(err);
+      if (err) reject(err);
+      var $ = cheerio.load(data.body, { normalizeWhitespace: true });
+      resolve($('#downloadButton').attr('href'));
+    });
+  });
+}
+
 module.exports = {
-  getDataFor: getDataFor
+  getDataFor: getDataFor,
+  downloadSubtitle: downloadSubtitle
 };
