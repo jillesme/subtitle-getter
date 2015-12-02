@@ -22,9 +22,10 @@ export default class Filter extends Component {
       display: 'inline-block'
     };
     return FilterStore.getAvailableFilters().map((language, i) => {
+      let isChecked = this.state.activeFilters.indexOf(language) > -1;
       return (
       <li key={i} style={liStyle}>
-        <input type="checkbox" name="language" value={language} onClick={this.toggleFilter}/> {language}
+        <input type="checkbox" name="language" value={language} defaultChecked={isChecked} onClick={this.toggleFilter}/> {language}
        </li>);
     });
   }
@@ -41,5 +42,8 @@ export default class Filter extends Component {
           </ul>
       </div>
     );
+  }
+  componentWillMount () {
+    FilterActions.getFiltersFromStorage();
   }
 }

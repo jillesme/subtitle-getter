@@ -22,6 +22,12 @@ module.exports = {
       actionType: ActionTypes.FILTER_TOGGLE,
       filter: filter
     });
+  },
+
+  getFiltersFromStorage: function () {
+    Dispatcher.dispatch({
+      actionType: ActionTypes.FILTER_FETCH_DB
+    });
   }
 
 };

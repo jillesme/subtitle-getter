@@ -2,6 +2,7 @@ import Dispatcher from '../dispatcher/Dispatcher';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 import { ActionTypes, AVAILABLE_FILTER_LANGUAGES } from '../constants/SubtitleConstants';
+import * as LocalStorage from 'store';
 
 const CHANGE_EVENT = 'change';
 
@@ -25,7 +26,14 @@ function toggle (filter) {
   } else {
     remove(filter, index);
   }
+  LocalStorage.set('filters', _state.activeFilters);
 }
+
+function fetch () {
+  let filtersFromDb = LocalStorage.get('filters') || [];
+  _state.activeFilters = filtersFromDb;
+}
+
 
 let FilterStore = assign({}, EventEmitter.prototype, {
 
@@ -74,6 +82,11 @@ Dispatcher.register(function (action) {
 
     case ActionTypes.FILTER_TOGGLE:
       toggle(action.filter);
+      FilterStore.emitChange();
+      break;
+
+    case ActionTypes.FILTER_FETCH_DB:
+      fetch();
       FilterStore.emitChange();
       break;
 
